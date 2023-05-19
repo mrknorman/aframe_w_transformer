@@ -4,12 +4,13 @@ from collections.abc import Callable
 import torch
 
 from bbhnet.architectures.resnet import BottleneckResNet, ResNet
+from bbhnet.architectures.transformer import TransformerNet
 
 architectures = {
+    "transformer": TransformerNet,
     "resnet": ResNet,
     "bottleneck": BottleneckResNet,
 }
-
 
 def get_arch_fn(name: str, fn, fn_kwargs={}):
     def arch_fn(**arch_kwargs):
@@ -26,7 +27,6 @@ def get_arch_fn(name: str, fn, fn_kwargs={}):
         return fn(**fn_kwargs)
 
     return arch_fn
-
 
 def get_arch_fns(fn, fn_kwargs={}):
     """Create functions for network architectures
